@@ -32,21 +32,37 @@ const getAllBlogs = (token) => {
 	}
 }
 
-const addNewBlog = async (blog, user) => {
-	const config = {
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${user.token}`,
-		},
+const addNewBlog = (blog, user) => {
+	return async (dispatch) => {
+		try {
+			dispatch({
+				type: 'ADD_BLOG_REQUEST',
+			})
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user.token}`,
+				},
+			}
+
+			const { data } = await axios.post(
+				'http://localhost:3003/api/blogs',
+				{ blog, user },
+				config
+			)
+
+			dispatch({
+				type: 'ADD_BLOG_SUCCESS',
+				payload: data,
+			})
+		} catch (error) {
+			dispatch({
+				type: 'ADD_BLOG_ERROR',
+				payload: error,
+			})
+		}
 	}
-
-	const { data } = await axios.post(
-		'http://localhost:3003/api/blogs',
-		{ blog, user },
-		config
-	)
-
-	return data
 }
 
 const deleteBlog = async (blog, token) => {

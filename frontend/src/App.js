@@ -19,7 +19,6 @@ const App = () => {
 	const logout = () => {
 		localStorage.removeItem('user')
 		setUser(null)
-		// setBlogs([])
 	}
 
 	useEffect(() => {
