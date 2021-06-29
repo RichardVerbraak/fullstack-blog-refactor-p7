@@ -1,0 +1,29 @@
+{
+  "name": "fullstack-blog",
+  "version": "1.0.0",
+  "description": "Blog exercise fullstack-open",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Richard Verbraak",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.4",
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
+  }
+}
