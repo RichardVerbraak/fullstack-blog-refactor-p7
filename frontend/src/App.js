@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Blogs from './components/Blogs'
 import CreateBlogForm from './components/CreateBlogForm'
 import UserForm from './components/UserForm'
-import { getAllBlogs } from './services/blogs'
+import { getAllBlogs } from './actions/blogs'
 
 const App = () => {
-	const [blogs, setBlogs] = useState([])
+	const dispatch = useDispatch()
+	const blogsReducer = useSelector((state) => {
+		return state.blogs
+	})
+
+	const { loading, blogs } = blogsReducer
+
 	const [user, setUser] = useState(null)
 	const [visible, setVisible] = useState(false)
 
 	const logout = () => {
 		localStorage.removeItem('user')
 		setUser(null)
-		setBlogs([])
+		// setBlogs([])
 	}
 
 	useEffect(() => {
@@ -24,14 +31,9 @@ const App = () => {
 
 	useEffect(() => {
 		if (user) {
-			const getBlogs = async () => {
-				const response = await getAllBlogs(user.token)
-
-				setBlogs(response)
-			}
-			getBlogs()
+			dispatch(getAllBlogs())
 		}
-	}, [user])
+	}, [user, dispatch])
 
 	return (
 		<div>
@@ -47,9 +49,7 @@ const App = () => {
 						</p>
 					</div>
 
-					{visible && (
-						<CreateBlogForm user={user} blogs={blogs} setBlogs={setBlogs} />
-					)}
+					{visible && <CreateBlogForm user={user} blogs={blogs} />}
 
 					<button
 						className='button-show-create'
@@ -62,7 +62,7 @@ const App = () => {
 
 					{blogs && blogs.length > 0 && (
 						<div className='blogs'>
-							<Blogs blogs={blogs} user={user} setBlogs={setBlogs} />
+							<Blogs blogs={blogs} user={user} />
 						</div>
 					)}
 				</div>

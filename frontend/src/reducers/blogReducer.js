@@ -1,4 +1,4 @@
-const blogReducer = (state = { blogs: [] }, action) => {
+const blogReducer = (state = { blogs: [], loading: false }, action) => {
 	switch (action.type) {
 		case 'GET_BLOGS_REQUEST':
 			return {
