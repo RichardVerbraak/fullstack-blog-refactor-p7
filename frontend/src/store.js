@@ -11,13 +11,25 @@ import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
 	blogs: blogListReducer,
-	user: userReducer,
+	userInfo: userReducer,
 
 	addBlog: addBlogReducer,
 	likeBlog: likeBlogReducer,
 	deleteBlog: deleteBlogReducer,
 })
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+const userFromLocalStorage = localStorage.getItem('user')
+	? JSON.parse(localStorage.getItem('user'))
+	: null
+
+const initialState = {
+	userInfo: { user: userFromLocalStorage },
+}
+
+const store = createStore(
+	reducers,
+	initialState,
+	composeWithDevTools(applyMiddleware(thunk))
+)
 
 export default store

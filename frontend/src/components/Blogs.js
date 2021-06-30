@@ -16,11 +16,8 @@ const Blogs = ({ blogs, user }) => {
 		margin: '10px 0px',
 	}
 
-	// Adds a like and then fetches blogs again
 	const likeBlogHandler = (blog, token) => {
 		dispatch(likeBlog(blog, token))
-		// const response = await getAllBlogs(token)
-		// setBlogs(response)
 	}
 
 	const deleteBlogHandler = (blog, token) => {
@@ -30,8 +27,6 @@ const Blogs = ({ blogs, user }) => {
 
 		if (confirm) {
 			dispatch(deleteBlog(blog, token))
-			// const response = await getAllBlogs(token)
-			// setBlogs(response)
 		}
 	}
 
