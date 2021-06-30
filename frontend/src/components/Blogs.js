@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { getAllBlogs, likeBlog, deleteBlog } from '../services/blogs'
+import { useDispatch } from 'react-redux'
+import { likeBlog, deleteBlog } from '../actions/blogs'
 
 // useState holds the ID of the one that is clicked => the blog that matches the one in state will show it's content
 // Hide button sets state back to null
 
-const Blogs = ({ blogs, user, setBlogs }) => {
+const Blogs = ({ blogs, user }) => {
 	const [currentBlog, setCurrentBlog] = useState(null)
+
+	const dispatch = useDispatch()
 
 	const blogStyle = {
 		padding: '10px 20px',
@@ -15,9 +18,9 @@ const Blogs = ({ blogs, user, setBlogs }) => {
 
 	// Adds a like and then fetches blogs again
 	const likeBlogHandler = async (blog, token) => {
-		await likeBlog(blog, token)
-		const response = await getAllBlogs(token)
-		setBlogs(response)
+		dispatch(likeBlog(blog, token))
+		// const response = await getAllBlogs(token)
+		// setBlogs(response)
 	}
 
 	const deleteBlogHandler = async (blog, token) => {
@@ -26,9 +29,9 @@ const Blogs = ({ blogs, user, setBlogs }) => {
 		)
 
 		if (confirm) {
-			await deleteBlog(blog, user.token)
-			const response = await getAllBlogs(token)
-			setBlogs(response)
+			dispatch(deleteBlog(blog, user.token))
+			// const response = await getAllBlogs(token)
+			// setBlogs(response)
 		}
 	}
 

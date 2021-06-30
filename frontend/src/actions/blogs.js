@@ -56,6 +56,9 @@ const addNewBlog = (blog, user) => {
 				type: 'ADD_BLOG_SUCCESS',
 				payload: data,
 			})
+
+			// Fetch updated state after adding a blog
+			dispatch(getAllBlogs())
 		} catch (error) {
 			dispatch({
 				type: 'ADD_BLOG_ERROR',
@@ -66,39 +69,71 @@ const addNewBlog = (blog, user) => {
 }
 
 const deleteBlog = async (blog, token) => {
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
+	return async (dispatch) => {
+		try {
+			dispatch({
+				type: 'DELETE_BLOG_REQUEST',
+			})
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+
+			const { data } = await axios.delete(
+				`http://localhost:3003/api/blogs/${blog.id}`,
+				config
+			)
+
+			dispatch({
+				type: 'DELETE_BLOG_SUCCESS',
+				payload: data,
+			})
+		} catch (error) {
+			dispatch({
+				type: 'DELETE_BLOG_FAIL',
+				payload: error,
+			})
+		}
 	}
-
-	const { data } = await axios.delete(
-		`http://localhost:3003/api/blogs/${blog.id}`,
-		config
-	)
-
-	return data
 }
 
 const likeBlog = async (blog, token) => {
-	const config = {
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
-		},
+	return async (dispatch) => {
+		try {
+			dispatch({
+				type: 'LIKE_BLOG_REQUEST',
+			})
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+			}
+
+			const updatedBlog = {
+				likes: blog.likes + 1,
+			}
+
+			const { data } = await axios.put(
+				`http://localhost:3003/api/blogs/${blog.id}`,
+				updatedBlog,
+				config
+			)
+
+			dispatch({
+				type: 'LIKE_BLOG_SUCCESS',
+				payload: data,
+			})
+		} catch (error) {
+			dispatch({
+				type: 'LIKE_BLOG_FAIL',
+				payload: error,
+			})
+		}
 	}
-
-	const updatedBlog = {
-		likes: blog.likes + 1,
-	}
-
-	const { data } = await axios.put(
-		`http://localhost:3003/api/blogs/${blog.id}`,
-		updatedBlog,
-		config
-	)
-
-	return data
 }
 
 export { getAllBlogs, addNewBlog, likeBlog, deleteBlog }

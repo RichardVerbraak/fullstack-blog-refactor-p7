@@ -1,43 +1,31 @@
 import React, { useState } from 'react'
-import { addNewBlog, getAllBlogs } from '../services/blogs'
+import { useDispatch } from 'react-redux'
+import { addNewBlog } from '../actions/blogs'
 
 import Message from './Message'
 
-const CreateBlogForm = ({ user, setBlogs }) => {
+const CreateBlogForm = ({ user }) => {
 	const [title, setTitle] = useState('')
 	const [author, setAuthor] = useState('')
 	const [url, setUrl] = useState('')
 	const [message, setMessage] = useState('')
 
+	const dispatch = useDispatch()
+
 	const onSubmitHandler = async (e) => {
 		e.preventDefault()
 
-		try {
-			const response = await addNewBlog({ title, author, url }, user)
+		dispatch(addNewBlog({ title, author, url }, user))
 
-			setTitle('')
-			setAuthor('')
-			setUrl('')
+		setTitle('')
+		setAuthor('')
+		setUrl('')
 
-			setMessage(`A new blog ${response.title} by ${response.author} added!`)
+		// setMessage(`A new blog ${response.title} by ${response.author} added!`)
 
-			setTimeout(() => {
-				setMessage('')
-			}, 5000)
-
-			const data = await getAllBlogs(user.token)
-			setBlogs(data)
-		} catch (error) {
-			const errorMessage = error.response
-				? error.response.data.message
-				: error.response
-
-			setMessage(errorMessage)
-
-			setTimeout(() => {
-				setMessage('')
-			}, 5000)
-		}
+		// setTimeout(() => {
+		// 	setMessage('')
+		// }, 5000)
 	}
 
 	return (
