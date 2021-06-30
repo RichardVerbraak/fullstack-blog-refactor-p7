@@ -1,15 +1,19 @@
 import axios from 'axios'
 
-const getAllBlogs = (token) => {
-	return async (dispatch) => {
+const getAllBlogs = () => {
+	return async (dispatch, getState) => {
 		try {
 			dispatch({
 				type: 'GET_BLOGS_REQUEST',
 			})
 
+			const {
+				userInfo: { user },
+			} = getState()
+
 			const config = {
 				headers: {
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${user.token}`,
 				},
 			}
 
@@ -32,12 +36,16 @@ const getAllBlogs = (token) => {
 	}
 }
 
-const addNewBlog = (blog, user) => {
-	return async (dispatch) => {
+const addNewBlog = (blog) => {
+	return async (dispatch, getState) => {
 		try {
 			dispatch({
 				type: 'ADD_BLOG_REQUEST',
 			})
+
+			const {
+				userInfo: { user },
+			} = getState()
 
 			const config = {
 				headers: {
@@ -68,16 +76,20 @@ const addNewBlog = (blog, user) => {
 	}
 }
 
-const deleteBlog = (blog, token) => {
-	return async (dispatch) => {
+const deleteBlog = (blog) => {
+	return async (dispatch, getState) => {
 		try {
 			dispatch({
 				type: 'DELETE_BLOG_REQUEST',
 			})
 
+			const {
+				userInfo: { user },
+			} = getState()
+
 			const config = {
 				headers: {
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${user.token}`,
 				},
 			}
 
@@ -101,17 +113,21 @@ const deleteBlog = (blog, token) => {
 	}
 }
 
-const likeBlog = (blog, token) => {
-	return async (dispatch) => {
+const likeBlog = (blog) => {
+	return async (dispatch, getState) => {
 		try {
 			dispatch({
 				type: 'LIKE_BLOG_REQUEST',
 			})
 
+			const {
+				userInfo: { user },
+			} = getState()
+
 			const config = {
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${user.token}`,
 				},
 			}
 

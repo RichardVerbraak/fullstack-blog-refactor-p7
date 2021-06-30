@@ -5,7 +5,7 @@ import { likeBlog, deleteBlog } from '../actions/blogs'
 // useState holds the ID of the one that is clicked => the blog that matches the one in state will show it's content
 // Hide button sets state back to null
 
-const Blogs = ({ blogs, user }) => {
+const Blogs = ({ blogs }) => {
 	const [currentBlog, setCurrentBlog] = useState(null)
 
 	const dispatch = useDispatch()
@@ -16,17 +16,17 @@ const Blogs = ({ blogs, user }) => {
 		margin: '10px 0px',
 	}
 
-	const likeBlogHandler = (blog, token) => {
-		dispatch(likeBlog(blog, token))
+	const likeBlogHandler = (blog) => {
+		dispatch(likeBlog(blog))
 	}
 
-	const deleteBlogHandler = (blog, token) => {
+	const deleteBlogHandler = (blog) => {
 		const confirm = window.confirm(
 			`Remove blog ${blog.title} by ${blog.author} ?`
 		)
 
 		if (confirm) {
-			dispatch(deleteBlog(blog, token))
+			dispatch(deleteBlog(blog))
 		}
 	}
 
@@ -81,7 +81,7 @@ const Blogs = ({ blogs, user }) => {
 							<button
 								className='button-like'
 								onClick={() => {
-									likeBlogHandler(blog, user.token)
+									likeBlogHandler(blog)
 								}}
 							>
 								Like
@@ -90,7 +90,7 @@ const Blogs = ({ blogs, user }) => {
 							<button
 								className='button-delete'
 								onClick={() => {
-									deleteBlogHandler(blog, user.token)
+									deleteBlogHandler(blog)
 								}}
 							>
 								Remove

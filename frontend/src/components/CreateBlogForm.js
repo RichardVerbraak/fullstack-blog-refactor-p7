@@ -15,7 +15,7 @@ const CreateBlogForm = ({ user }) => {
 	const onSubmitHandler = (e) => {
 		e.preventDefault()
 
-		dispatch(addNewBlog({ title, author, url }, user))
+		dispatch(addNewBlog({ title, author, url }))
 
 		setTitle('')
 		setAuthor('')

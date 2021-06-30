@@ -1,20 +1,35 @@
-import React, { useState } from 'react'
-import { loginUser } from '../services/users'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../actions/user'
 
 import Message from './Message'
 
-const UserForm = ({ setUser }) => {
+const UserForm = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [message, setMessage] = useState('')
+
+	const dispatch = useDispatch()
+
+	const userReducer = useSelector((state) => {
+		return state.userInfo
+	})
+
+	const { loading, user } = userReducer
+
+	console.log(userReducer)
+
+	// useEffect(() => {
+	// 	if (user) {
+
+	// 	}
+	// }, [user])
 
 	const onSubmitHandler = async (e) => {
 		e.preventDefault()
 
 		try {
-			const response = await loginUser({ username, password })
-
-			setUser(response)
+			dispatch(loginUser({ username, password }))
 		} catch (error) {
 			const errorMessage = error.response
 				? error.response.data.message

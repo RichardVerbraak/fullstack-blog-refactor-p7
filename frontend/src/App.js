@@ -7,26 +7,28 @@ import { getAllBlogs } from './actions/blogs'
 
 const App = () => {
 	const dispatch = useDispatch()
+
 	const blogsReducer = useSelector((state) => {
 		return state.blogs
 	})
+	const { loading: loadingBlogs, blogs } = blogsReducer
 
-	const { loading, blogs } = blogsReducer
+	const userReducer = useSelector((state) => {
+		return state.userInfo
+	})
 
-	const [user, setUser] = useState(null)
+	const { loading: loadingUser, user } = userReducer
+
 	const [visible, setVisible] = useState(false)
 
 	const logout = () => {
+		dispatch({
+			type: 'USER_LOGOUT',
+		})
 		localStorage.removeItem('user')
-		setUser(null)
-	}
 
-	useEffect(() => {
-		const userFromLocalStorage = JSON.parse(localStorage.getItem('user'))
-		if (userFromLocalStorage) {
-			setUser(userFromLocalStorage)
-		}
-	}, [])
+		// push back to UserForm
+	}
 
 	useEffect(() => {
 		if (user) {
@@ -48,7 +50,7 @@ const App = () => {
 						</p>
 					</div>
 
-					{visible && <CreateBlogForm user={user} blogs={blogs} />}
+					{visible && <CreateBlogForm blogs={blogs} />}
 
 					<button
 						className='button-show-create'
@@ -61,14 +63,14 @@ const App = () => {
 
 					{blogs && blogs.length > 0 && (
 						<div className='blogs'>
-							<Blogs blogs={blogs} user={user} />
+							<Blogs blogs={blogs} />
 						</div>
 					)}
 				</div>
 			) : (
 				<div>
 					<h2>Login to application</h2>
-					<UserForm setUser={setUser} />
+					<UserForm />
 				</div>
 			)}
 		</div>
