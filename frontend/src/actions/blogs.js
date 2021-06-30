@@ -68,7 +68,7 @@ const addNewBlog = (blog, user) => {
 	}
 }
 
-const deleteBlog = async (blog, token) => {
+const deleteBlog = (blog, token) => {
 	return async (dispatch) => {
 		try {
 			dispatch({
@@ -90,6 +90,8 @@ const deleteBlog = async (blog, token) => {
 				type: 'DELETE_BLOG_SUCCESS',
 				payload: data,
 			})
+
+			dispatch(getAllBlogs())
 		} catch (error) {
 			dispatch({
 				type: 'DELETE_BLOG_FAIL',
@@ -99,7 +101,7 @@ const deleteBlog = async (blog, token) => {
 	}
 }
 
-const likeBlog = async (blog, token) => {
+const likeBlog = (blog, token) => {
 	return async (dispatch) => {
 		try {
 			dispatch({
@@ -122,6 +124,9 @@ const likeBlog = async (blog, token) => {
 				updatedBlog,
 				config
 			)
+
+			// Use optimistic update
+			console.log(data)
 
 			dispatch({
 				type: 'LIKE_BLOG_SUCCESS',

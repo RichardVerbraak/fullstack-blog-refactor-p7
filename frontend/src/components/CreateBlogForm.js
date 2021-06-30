@@ -12,7 +12,7 @@ const CreateBlogForm = ({ user }) => {
 
 	const dispatch = useDispatch()
 
-	const onSubmitHandler = async (e) => {
+	const onSubmitHandler = (e) => {
 		e.preventDefault()
 
 		dispatch(addNewBlog({ title, author, url }, user))

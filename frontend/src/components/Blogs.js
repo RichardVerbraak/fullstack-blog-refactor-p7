@@ -17,19 +17,19 @@ const Blogs = ({ blogs, user }) => {
 	}
 
 	// Adds a like and then fetches blogs again
-	const likeBlogHandler = async (blog, token) => {
+	const likeBlogHandler = (blog, token) => {
 		dispatch(likeBlog(blog, token))
 		// const response = await getAllBlogs(token)
 		// setBlogs(response)
 	}
 
-	const deleteBlogHandler = async (blog, token) => {
+	const deleteBlogHandler = (blog, token) => {
 		const confirm = window.confirm(
 			`Remove blog ${blog.title} by ${blog.author} ?`
 		)
 
 		if (confirm) {
-			dispatch(deleteBlog(blog, user.token))
+			dispatch(deleteBlog(blog, token))
 			// const response = await getAllBlogs(token)
 			// setBlogs(response)
 		}
@@ -95,7 +95,7 @@ const Blogs = ({ blogs, user }) => {
 							<button
 								className='button-delete'
 								onClick={() => {
-									deleteBlogHandler(blog)
+									deleteBlogHandler(blog, user.token)
 								}}
 							>
 								Remove
