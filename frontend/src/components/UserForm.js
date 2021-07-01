@@ -17,8 +17,6 @@ const UserForm = () => {
 
 	const { loading, user } = userReducer
 
-	console.log(userReducer)
-
 	// useEffect(() => {
 	// 	if (user) {
 
