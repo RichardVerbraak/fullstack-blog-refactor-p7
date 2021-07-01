@@ -24,4 +24,26 @@ const userReducer = (state = { user: {} }, action) => {
 	}
 }
 
-export default userReducer
+const userListReducer = (state = { users: [] }, action) => {
+	switch (action.type) {
+		case 'GET_USERS_REQUEST':
+			return {
+				loading: true,
+			}
+
+		case 'GET_USERS_SUCCESS':
+			return {
+				loading: true,
+				users: action.payload,
+			}
+
+		case 'GET_USERS_FAIL':
+			return {
+				loading: true,
+			}
+		default:
+			return state
+	}
+}
+
+export { userReducer, userListReducer }

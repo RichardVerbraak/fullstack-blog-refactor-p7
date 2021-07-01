@@ -1,5 +1,27 @@
 import axios from 'axios'
 
+const getAllUsers = () => {
+	return async (dispatch) => {
+		try {
+			dispatch({
+				type: 'GET_USERS',
+			})
+
+			dispatch({
+				type: 'GET_USERS_SUCCESS',
+			})
+		} catch (error) {
+			dispatch({
+				type: 'GET_USERS_FAIL',
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
+			})
+		}
+	}
+}
+
 const loginUser = (user) => {
 	return async (dispatch) => {
 		try {
@@ -47,4 +69,4 @@ const logoutUser = () => {
 	}
 }
 
-export { loginUser, logoutUser }
+export { getAllUsers, loginUser, logoutUser }
