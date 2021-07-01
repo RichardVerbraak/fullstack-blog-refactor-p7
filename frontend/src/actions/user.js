@@ -28,10 +28,23 @@ const loginUser = (user) => {
 		} catch (error) {
 			dispatch({
 				type: 'USER_LOGIN_FAIL',
-				payload: error,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
 			})
 		}
 	}
 }
 
-export { loginUser }
+const logoutUser = () => {
+	return async (dispatch) => {
+		dispatch({
+			type: 'USER_LOGOUT',
+		})
+
+		localStorage.removeItem('user')
+	}
+}
+
+export { loginUser, logoutUser }

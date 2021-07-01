@@ -4,21 +4,20 @@ import { loginUser } from '../actions/user'
 
 import Message from './Message'
 
-const UserForm = ({ history }) => {
+const LoginForm = ({ history }) => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const [message, setMessage] = useState('')
 
 	const dispatch = useDispatch()
 
 	const userReducer = useSelector((state) => {
 		return state.userInfo
 	})
-
-	const { loading, user } = userReducer
+	const { loading, user, error } = userReducer
 
 	useEffect(() => {
 		if (user) {
+			// Push to home if logged in
 			history.push('/')
 		}
 	}, [user, history])
@@ -26,25 +25,13 @@ const UserForm = ({ history }) => {
 	const onSubmitHandler = async (e) => {
 		e.preventDefault()
 
-		try {
-			dispatch(loginUser({ username, password }))
-		} catch (error) {
-			const errorMessage = error.response
-				? error.response.data.message
-				: error.response
-
-			setMessage(errorMessage)
-
-			setTimeout(() => {
-				setMessage('')
-			}, 5000)
-		}
+		dispatch(loginUser({ username, password }))
 	}
 
 	return (
 		<div>
 			<h2>Login to application</h2>
-			{message && <Message message={message} />}
+			{error && <Message message={error} />}
 			<form className='login-form' onSubmit={onSubmitHandler}>
 				<div>
 					<label>
@@ -84,4 +71,4 @@ const UserForm = ({ history }) => {
 	)
 }
 
-export default UserForm
+export default LoginForm

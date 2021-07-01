@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Blogs from '../components/Blogs'
+import Message from '../components/Message'
 import CreateBlogForm from '../components/CreateBlogForm'
-import UserForm from '../components/UserForm'
 import { getAllBlogs } from '../actions/blogs'
+import { logoutUser } from '../actions/user'
 
 const Home = ({ history }) => {
+	const [visible, setVisible] = useState(false)
+
 	const dispatch = useDispatch()
 
 	const blogsReducer = useSelector((state) => {
 		return state.blogs
 	})
-	const { loading: loadingBlogs, blogs } = blogsReducer
+	const { loading: loadingBlogs, blogs, errorBlogs } = blogsReducer
 
 	const userReducer = useSelector((state) => {
 		return state.userInfo
 	})
-
 	const { loading: loadingUser, user } = userReducer
-
-	const [visible, setVisible] = useState(false)
-
-	const logout = () => {
-		dispatch({
-			type: 'USER_LOGOUT',
-		})
-		localStorage.removeItem('user')
-
-		// push back to UserForm
-		history.push('/login')
-	}
 
 	useEffect(() => {
 		if (!user) {
@@ -42,6 +32,10 @@ const Home = ({ history }) => {
 			dispatch(getAllBlogs())
 		}
 	}, [user, dispatch])
+
+	const logout = () => {
+		dispatch(logoutUser())
+	}
 
 	return (
 		<div>
@@ -67,7 +61,11 @@ const Home = ({ history }) => {
 					{visible ? 'cancel' : 'create blog'}
 				</button>
 
-				{blogs && blogs.length > 0 && (
+				{loadingBlogs ? (
+					<h1>Loading blogs...</h1>
+				) : errorBlogs ? (
+					<Message message={errorBlogs} />
+				) : (
 					<div className='blogs'>
 						<Blogs blogs={blogs} />
 					</div>

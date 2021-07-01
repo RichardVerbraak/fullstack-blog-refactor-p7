@@ -10,7 +10,7 @@ const userExtractor = require('../middleware/userMiddleware')
 
 const router = express.Router()
 
-router.get('/', getAllBlogs)
+router.get('/', userExtractor, getAllBlogs)
 
 router.post('/', userExtractor, addNewBlog)
 

@@ -1,4 +1,4 @@
-const blogListReducer = (state = { blogs: [], loading: false }, action) => {
+const blogListReducer = (state = { blogs: [] }, action) => {
 	switch (action.type) {
 		case 'GET_BLOGS_REQUEST':
 			return {
@@ -22,7 +22,7 @@ const blogListReducer = (state = { blogs: [], loading: false }, action) => {
 	}
 }
 
-const addBlogReducer = (state = { loading: false }, action) => {
+const addBlogReducer = (state = {}, action) => {
 	switch (action.type) {
 		case 'ADD_BLOG_REQUEST':
 			return {
@@ -45,7 +45,7 @@ const addBlogReducer = (state = { loading: false }, action) => {
 	}
 }
 
-const likeBlogReducer = (state = { loading: false }, action) => {
+const likeBlogReducer = (state = {}, action) => {
 	switch (action.type) {
 		case 'LIKE_BLOG_REQUEST':
 			return {
@@ -68,7 +68,7 @@ const likeBlogReducer = (state = { loading: false }, action) => {
 	}
 }
 
-const deleteBlogReducer = (state = { loading: false }, action) => {
+const deleteBlogReducer = (state = {}, action) => {
 	switch (action.type) {
 		case 'DELETE_BLOG_REQUEST':
 			console.log(action.type)

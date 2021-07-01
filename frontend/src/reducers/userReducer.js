@@ -1,4 +1,4 @@
-const userReducer = (state = { user: {}, loading: false }, action) => {
+const userReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case 'USER_LOGIN_REQUEST':
 			return {
@@ -18,9 +18,7 @@ const userReducer = (state = { user: {}, loading: false }, action) => {
 			}
 
 		case 'USER_LOGOUT':
-			return {
-				user: {},
-			}
+			return {}
 		default:
 			return state
 	}

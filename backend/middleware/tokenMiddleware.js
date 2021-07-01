@@ -1,3 +1,5 @@
+// Assigns token to req object as 'token'
+
 const tokenExtractor = (req, res, next) => {
 	if (
 		req.headers.authorization &&

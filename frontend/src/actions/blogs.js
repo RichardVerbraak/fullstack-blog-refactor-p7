@@ -27,10 +27,12 @@ const getAllBlogs = () => {
 				payload: data,
 			})
 		} catch (error) {
-			console.log(error)
 			dispatch({
 				type: 'GET_BLOGS_FAIL',
-				payload: error,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
 			})
 		}
 	}
@@ -70,7 +72,10 @@ const addNewBlog = (blog) => {
 		} catch (error) {
 			dispatch({
 				type: 'ADD_BLOG_ERROR',
-				payload: error,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
 			})
 		}
 	}
@@ -107,7 +112,10 @@ const deleteBlog = (blog) => {
 		} catch (error) {
 			dispatch({
 				type: 'DELETE_BLOG_FAIL',
-				payload: error,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
 			})
 		}
 	}
@@ -151,7 +159,10 @@ const likeBlog = (blog) => {
 		} catch (error) {
 			dispatch({
 				type: 'LIKE_BLOG_FAIL',
-				payload: error,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
 			})
 		}
 	}
