@@ -8,7 +8,7 @@ const userReducer = (state = { user: {}, loading: false }, action) => {
 		case 'USER_LOGIN_SUCCESS':
 			return {
 				loading: false,
-				payload: action.payload,
+				user: action.payload,
 			}
 
 		case 'USER_LOGIN_ERROR':

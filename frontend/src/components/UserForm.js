@@ -4,7 +4,7 @@ import { loginUser } from '../actions/user'
 
 import Message from './Message'
 
-const UserForm = () => {
+const UserForm = ({ history }) => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [message, setMessage] = useState('')
@@ -16,6 +16,12 @@ const UserForm = () => {
 	})
 
 	const { loading, user } = userReducer
+
+	useEffect(() => {
+		if (user) {
+			history.push('/')
+		}
+	}, [user, history])
 
 	const onSubmitHandler = async (e) => {
 		e.preventDefault()
@@ -37,6 +43,7 @@ const UserForm = () => {
 
 	return (
 		<div>
+			<h2>Login to application</h2>
 			{message && <Message message={message} />}
 			<form className='login-form' onSubmit={onSubmitHandler}>
 				<div>
