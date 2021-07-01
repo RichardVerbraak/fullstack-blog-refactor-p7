@@ -17,12 +17,6 @@ const UserForm = () => {
 
 	const { loading, user } = userReducer
 
-	// useEffect(() => {
-	// 	if (user) {
-
-	// 	}
-	// }, [user])
-
 	const onSubmitHandler = async (e) => {
 		e.preventDefault()
 
