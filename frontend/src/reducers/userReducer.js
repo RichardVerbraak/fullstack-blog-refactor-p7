@@ -33,7 +33,7 @@ const userListReducer = (state = { users: [] }, action) => {
 
 		case 'GET_USERS_SUCCESS':
 			return {
-				loading: true,
+				loading: false,
 				users: action.payload,
 			}
 
