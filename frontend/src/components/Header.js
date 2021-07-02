@@ -19,7 +19,7 @@ const Header = () => {
 			<h2>Blogs</h2>
 			<div>
 				<p>
-					{user && user.username} logged in{' '}
+					{user && user.name} logged in{' '}
 					<span>
 						<button onClick={logout}>Logout</button>
 					</span>

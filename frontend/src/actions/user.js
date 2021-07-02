@@ -1,30 +1,5 @@
 import axios from 'axios'
 
-const getAllUsers = () => {
-	return async (dispatch) => {
-		try {
-			dispatch({
-				type: 'GET_USERS',
-			})
-
-			const { data } = await axios.get('http://localhost:3003/api/users/')
-
-			dispatch({
-				type: 'GET_USERS_SUCCESS',
-				payload: data,
-			})
-		} catch (error) {
-			dispatch({
-				type: 'GET_USERS_FAIL',
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error,
-			})
-		}
-	}
-}
-
 const loginUser = (user) => {
 	return async (dispatch) => {
 		try {
@@ -69,6 +44,56 @@ const logoutUser = () => {
 		})
 
 		localStorage.removeItem('user')
+	}
+}
+
+const getAllUsers = () => {
+	return async (dispatch) => {
+		try {
+			dispatch({
+				type: 'GET_USERS_REQUEST',
+			})
+
+			const { data } = await axios.get('http://localhost:3003/api/users/')
+
+			dispatch({
+				type: 'GET_USERS_SUCCESS',
+				payload: data,
+			})
+		} catch (error) {
+			dispatch({
+				type: 'GET_USERS_FAIL',
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
+			})
+		}
+	}
+}
+
+const getUserDetails = () => {
+	return async (dispatch) => {
+		try {
+			dispatch({
+				type: 'GET_USER_DETAILS_REQUEST',
+			})
+
+			// const { data } = await axios.get('http://localhost:3003/api/users/')
+
+			dispatch({
+				type: 'GET_USER_DETAILS_SUCCESS',
+				// payload: data,
+			})
+		} catch (error) {
+			dispatch({
+				type: 'GET_USER_DETAILS_FAIL',
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
+			})
+		}
 	}
 }
 
