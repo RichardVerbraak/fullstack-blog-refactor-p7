@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../actions/user'
 
+import Header from './Header'
+
 const Users = () => {
 	const dispatch = useDispatch()
 
@@ -16,6 +18,8 @@ const Users = () => {
 
 	return (
 		<div>
+			<Header />
+
 			<h2>Users</h2>
 
 			{loading ? (

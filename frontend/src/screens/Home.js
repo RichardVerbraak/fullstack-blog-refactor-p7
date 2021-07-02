@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import Header from '../components/Header'
 import Blogs from '../components/Blogs'
 import Message from '../components/Message'
 import CreateBlogForm from '../components/CreateBlogForm'
+
 import { getAllBlogs } from '../actions/blogs'
-import { logoutUser } from '../actions/user'
 
 const Home = ({ history }) => {
 	const [visible, setVisible] = useState(false)
@@ -33,22 +35,10 @@ const Home = ({ history }) => {
 		}
 	}, [user, dispatch])
 
-	const logout = () => {
-		dispatch(logoutUser())
-	}
-
 	return (
 		<div>
 			<div>
-				<h2>Blogs</h2>
-				<div>
-					<p>
-						{user && user.username} logged in{' '}
-						<span>
-							<button onClick={logout}>Logout</button>
-						</span>
-					</p>
-				</div>
+				<Header />
 
 				{visible && <CreateBlogForm blogs={blogs} />}
 
