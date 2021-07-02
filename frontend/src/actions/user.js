@@ -7,8 +7,11 @@ const getAllUsers = () => {
 				type: 'GET_USERS',
 			})
 
+			const { data } = await axios.get('http://localhost:3003/api/users/')
+
 			dispatch({
 				type: 'GET_USERS_SUCCESS',
+				payload: data,
 			})
 		} catch (error) {
 			dispatch({

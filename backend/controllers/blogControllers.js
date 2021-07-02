@@ -2,14 +2,11 @@ const jwt = require('jsonwebtoken')
 const Blog = require('../models/blogModel')
 const User = require('../models/userModel')
 
+// Finds the user and 'replaces' the IDs of the stored blogs with the actual content of said blogs
 const getAllBlogs = async (req, res) => {
-	const blogs = await Blog.find({}).populate('user', {
-		username: 1,
-		name: 1,
-		id: 1,
-	})
+	const user = await User.findById(req.user.id).populate('blogs')
 
-	res.send(blogs)
+	res.send(user.blogs)
 }
 
 // Could refactor the authentication process into it's own middleware
@@ -92,25 +89,5 @@ const updateBlog = async (req, res, next) => {
 		next(error)
 	}
 }
-
-// const likeBlog = async (req, res, next) => {
-// 	try {
-// 		const id = req.params.id
-
-// 		const blog = await Blog.findById(id)
-
-// 		const { likes } = req.body
-
-// 		blog.likes = likes || blog.likes
-
-// 		const updatedBlog = await blog.save()
-
-// 		res.status(200)
-// 		res.send(updatedBlog)
-// 	} catch (error) {
-// 		res.status(400)
-// 		next(error)
-// 	}
-// }
 
 module.exports = { getAllBlogs, addNewBlog, deleteBlog, updateBlog }

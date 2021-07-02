@@ -30,76 +30,83 @@ const Blogs = ({ blogs }) => {
 		}
 	}
 
-	return blogs
-		.sort((a, b) => {
-			// return value is higher than 0 => b is sorted before a
-			if (a.likes < b.likes) {
-				return 1
-			}
+	return (
+		<div>
+			{blogs.length === 0 && <h1>No blogs, go create some!</h1>}
 
-			// return value is less than 0 => a is sorted before b
-			if (a.likes > b.likes) {
-				return -1
-			}
+			{blogs.length > 0 &&
+				blogs
+					.sort((a, b) => {
+						// return value is higher than 0 => b is sorted before a
+						if (a.likes < b.likes) {
+							return 1
+						}
 
-			// return value is 0 than a and b unchanged with respect to each other but sorted with respect to all different elements
-			return 0
-		})
-		.map((blog) => {
-			return (
-				<div className='blog' key={blog.id} style={blogStyle}>
-					<div>
-						<p className='blog-title-author'>
-							{blog.title} {blog.author}
-							<span>
-								{blog.id === currentBlog ? (
-									<button
-										onClick={() => {
-											setCurrentBlog(null)
-										}}
-									>
-										Hide
-									</button>
-								) : (
-									<button
-										className='button-view'
-										onClick={() => {
-											setCurrentBlog(blog.id)
-										}}
-									>
-										View
-									</button>
+						// return value is less than 0 => a is sorted before b
+						if (a.likes > b.likes) {
+							return -1
+						}
+
+						// return value is 0 than a and b unchanged with respect to each other but sorted with respect to all different elements
+						return 0
+					})
+					.map((blog) => {
+						return (
+							<div className='blog' key={blog.id} style={blogStyle}>
+								<div>
+									<p className='blog-title-author'>
+										{blog.title} {blog.author}
+										<span>
+											{blog.id === currentBlog ? (
+												<button
+													onClick={() => {
+														setCurrentBlog(null)
+													}}
+												>
+													Hide
+												</button>
+											) : (
+												<button
+													className='button-view'
+													onClick={() => {
+														setCurrentBlog(blog.id)
+													}}
+												>
+													View
+												</button>
+											)}
+										</span>
+									</p>
+								</div>
+
+								{blog.id === currentBlog && (
+									<div>
+										<p className='blog-url'>{blog.url}</p>
+										<p className='blog-likes'>{blog.likes}</p>
+										<button
+											className='button-like'
+											onClick={() => {
+												likeBlogHandler(blog)
+											}}
+										>
+											Like
+										</button>
+										<p>Creator</p>
+										<button
+											className='button-delete'
+											onClick={() => {
+												deleteBlogHandler(blog)
+											}}
+										>
+											Remove
+										</button>
+									</div>
 								)}
-							</span>
-						</p>
-					</div>
-
-					{blog.id === currentBlog && (
-						<div>
-							<p className='blog-url'>{blog.url}</p>
-							<p className='blog-likes'>{blog.likes}</p>
-							<button
-								className='button-like'
-								onClick={() => {
-									likeBlogHandler(blog)
-								}}
-							>
-								Like
-							</button>
-							<p>Creator</p>
-							<button
-								className='button-delete'
-								onClick={() => {
-									deleteBlogHandler(blog)
-								}}
-							>
-								Remove
-							</button>
-						</div>
-					)}
-				</div>
-			)
-		})
+							</div>
+						)
+					})}
+		</div>
+	)
 }
 
 export default Blogs
