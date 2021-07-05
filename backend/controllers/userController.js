@@ -11,7 +11,7 @@ const createUser = async (req, res, next) => {
 		res.status(201)
 		res.send(user)
 	} catch (error) {
-		res.status(400)
+		res.status(500)
 		next(error)
 	}
 }
@@ -28,8 +28,22 @@ const getAllUsers = async (req, res) => {
 		res.status(200)
 		res.send(users)
 	} catch (error) {
-		res.json(error)
-		console.error(error)
+		res.status(404)
+		next(error)
+	}
+}
+
+const getUserDetails = async () => {
+	try {
+		const id = req.params.id
+
+		const user = await User.findById(id)
+
+		res.status(200)
+		res.send(user)
+	} catch (error) {
+		res.status(404)
+		next(error)
 	}
 }
 
@@ -63,4 +77,4 @@ const loginUser = async (req, res, next) => {
 	}
 }
 
-module.exports = { createUser, getAllUsers, loginUser }
+module.exports = { createUser, getAllUsers, getUserDetails, loginUser }
