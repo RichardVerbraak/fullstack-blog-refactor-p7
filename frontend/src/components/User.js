@@ -5,7 +5,7 @@ import { getUserDetails } from '../actions/user'
 import Header from './Header'
 import Message from './Message'
 
-const User = ({ match }) => {
+const User = ({ match, history }) => {
 	const id = match.params.id
 
 	const userDetails = useSelector((state) => {
@@ -21,7 +21,7 @@ const User = ({ match }) => {
 
 	return (
 		<div>
-			<Header />
+			<Header history={history} />
 
 			{loading ? (
 				<h2>Loading user details...</h2>
@@ -35,7 +35,7 @@ const User = ({ match }) => {
 						<ul>
 							{user.blogs &&
 								user.blogs.map((blog) => {
-									return <li>{blog.title}</li>
+									return <li key={blog.id}>{blog.title}</li>
 								})}
 						</ul>
 					</div>

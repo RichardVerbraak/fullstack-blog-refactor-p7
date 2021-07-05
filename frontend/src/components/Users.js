@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 import Header from './Header'
 
-const Users = () => {
+const Users = ({ history }) => {
 	const dispatch = useDispatch()
 
 	const userListReducer = useSelector((state) => {
@@ -20,7 +20,7 @@ const Users = () => {
 
 	return (
 		<div>
-			<Header />
+			<Header history={history} />
 
 			<h2>Users</h2>
 

@@ -81,8 +81,6 @@ const getUserDetails = (id) => {
 
 			const { data } = await axios.get(`http://localhost:3003/api/users/${id}`)
 
-			console.log(data)
-
 			dispatch({
 				type: 'GET_USER_DETAILS_SUCCESS',
 				payload: data,

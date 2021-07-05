@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import { useDispatch } from 'react-redux'
 import { likeBlog, deleteBlog } from '../actions/blogs'
 
@@ -6,8 +8,6 @@ import { likeBlog, deleteBlog } from '../actions/blogs'
 // Hide button sets state back to null
 
 const Blogs = ({ blogs }) => {
-	const [currentBlog, setCurrentBlog] = useState(null)
-
 	const dispatch = useDispatch()
 
 	const blogStyle = {
@@ -54,54 +54,10 @@ const Blogs = ({ blogs }) => {
 						return (
 							<div className='blog' key={blog.id} style={blogStyle}>
 								<div>
-									<p className='blog-title-author'>
+									<Link to={`/blogs/${blog.id}`} className='blog-title-author'>
 										{blog.title} {blog.author}
-										<span>
-											{blog.id === currentBlog ? (
-												<button
-													onClick={() => {
-														setCurrentBlog(null)
-													}}
-												>
-													Hide
-												</button>
-											) : (
-												<button
-													className='button-view'
-													onClick={() => {
-														setCurrentBlog(blog.id)
-													}}
-												>
-													View
-												</button>
-											)}
-										</span>
-									</p>
+									</Link>
 								</div>
-
-								{blog.id === currentBlog && (
-									<div>
-										<p className='blog-url'>{blog.url}</p>
-										<p className='blog-likes'>{blog.likes}</p>
-										<button
-											className='button-like'
-											onClick={() => {
-												likeBlogHandler(blog)
-											}}
-										>
-											Like
-										</button>
-										<p>Creator</p>
-										<button
-											className='button-delete'
-											onClick={() => {
-												deleteBlogHandler(blog)
-											}}
-										>
-											Remove
-										</button>
-									</div>
-								)}
 							</div>
 						)
 					})}

@@ -4,9 +4,11 @@ const User = require('../models/userModel')
 
 // Finds the user and 'replaces' the IDs of the stored blogs with the actual content of said blogs
 const getAllBlogs = async (req, res) => {
-	const user = await User.findById(req.user.id).populate('blogs')
+	// const user = await User.findById(req.user.id).populate('blogs')
 
-	res.send(user.blogs)
+	const blogs = await Blog.find({})
+
+	res.send(blogs)
 }
 
 const getBlogDetails = async (req, res) => {

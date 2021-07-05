@@ -6,7 +6,7 @@ import Message from './Message'
 
 import { getBlogDetails } from '../actions/blogs'
 
-const Blog = ({ match }) => {
+const Blog = ({ match, history }) => {
 	const id = match.params.id
 
 	const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const Blog = ({ match }) => {
 
 	return (
 		<div>
-			<Header />
+			<Header history={history} />
 
 			{loading ? (
 				<h2>Loading blog details...</h2>
@@ -34,7 +34,7 @@ const Blog = ({ match }) => {
 					<div>
 						<a href={blog.url}>{blog.url}</a>
 						<p>{blog.likes} like</p>
-						<p>added by {blog.user.name}</p>
+						{blog.user && <p>added by {blog.user.name}</p>}
 					</div>
 				</div>
 			)}
