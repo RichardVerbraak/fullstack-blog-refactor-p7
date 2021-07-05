@@ -33,7 +33,7 @@ const getAllUsers = async (req, res) => {
 	}
 }
 
-const getUserDetails = async () => {
+const getUserDetails = async (req, res) => {
 	try {
 		const id = req.params.id
 

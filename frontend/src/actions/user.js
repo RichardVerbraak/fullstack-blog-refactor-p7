@@ -72,18 +72,18 @@ const getAllUsers = () => {
 	}
 }
 
-const getUserDetails = () => {
+const getUserDetails = (id) => {
 	return async (dispatch) => {
 		try {
 			dispatch({
 				type: 'GET_USER_DETAILS_REQUEST',
 			})
 
-			// const { data } = await axios.get('http://localhost:3003/api/users/')
+			const { data } = await axios.get(`http://localhost:3003/api/users/${id}`)
 
 			dispatch({
 				type: 'GET_USER_DETAILS_SUCCESS',
-				// payload: data,
+				payload: data,
 			})
 		} catch (error) {
 			dispatch({
@@ -97,4 +97,4 @@ const getUserDetails = () => {
 	}
 }
 
-export { getAllUsers, loginUser, logoutUser }
+export { getAllUsers, loginUser, logoutUser, getUserDetails }

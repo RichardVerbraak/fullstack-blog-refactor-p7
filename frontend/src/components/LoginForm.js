@@ -13,7 +13,7 @@ const LoginForm = ({ history }) => {
 	const userReducer = useSelector((state) => {
 		return state.userInfo
 	})
-	const { loading, user, error } = userReducer
+	const { user, error } = userReducer
 
 	useEffect(() => {
 		if (user) {

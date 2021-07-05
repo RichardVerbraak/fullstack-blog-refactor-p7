@@ -21,7 +21,7 @@ const Home = ({ history }) => {
 	const userReducer = useSelector((state) => {
 		return state.userInfo
 	})
-	const { loading: loadingUser, user } = userReducer
+	const { user } = userReducer
 
 	useEffect(() => {
 		if (!user) {
