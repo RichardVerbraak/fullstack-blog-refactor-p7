@@ -22,6 +22,30 @@ const blogListReducer = (state = { blogs: [] }, action) => {
 	}
 }
 
+const blogDetailsReducer = (state = { blog: {} }, action) => {
+	switch (action.type) {
+		case 'GET_BLOG_DETAILS_REQUEST':
+			return {
+				loading: true,
+			}
+
+		case 'GET_BLOG_DETAILS_SUCCESS':
+			return {
+				loading: false,
+				blog: action.payload,
+			}
+
+		case 'GET_BLOG_DETAILS_FAIL':
+			return {
+				loading: false,
+				error: action.payload,
+			}
+
+		default:
+			return state
+	}
+}
+
 const addBlogReducer = (state = {}, action) => {
 	switch (action.type) {
 		case 'ADD_BLOG_REQUEST':
@@ -92,4 +116,10 @@ const deleteBlogReducer = (state = {}, action) => {
 	}
 }
 
-export { blogListReducer, addBlogReducer, likeBlogReducer, deleteBlogReducer }
+export {
+	blogListReducer,
+	blogDetailsReducer,
+	addBlogReducer,
+	likeBlogReducer,
+	deleteBlogReducer,
+}

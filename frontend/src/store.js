@@ -7,6 +7,7 @@ import {
 	addBlogReducer,
 	likeBlogReducer,
 	deleteBlogReducer,
+	blogDetailsReducer,
 } from './reducers/blogReducer'
 
 import {
@@ -22,6 +23,7 @@ const reducers = combineReducers({
 	userDetails: userDetailsReducer,
 	userLogin: userLoginReducer,
 
+	blogDetails: blogDetailsReducer,
 	addBlog: addBlogReducer,
 	likeBlog: likeBlogReducer,
 	deleteBlog: deleteBlogReducer,
