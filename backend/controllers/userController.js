@@ -37,7 +37,7 @@ const getUserDetails = async (req, res) => {
 	try {
 		const id = req.params.id
 
-		const user = await User.findById(id)
+		const user = await User.findById(id).populate('blogs')
 
 		res.status(200)
 		res.send(user)
