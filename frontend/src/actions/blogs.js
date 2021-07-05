@@ -45,7 +45,9 @@ const getBlogDetails = (id) => {
 				type: 'GET_BLOG_DETAILS_REQUEST',
 			})
 
-			const { userLogin: user } = getState()
+			const {
+				userLogin: { user },
+			} = getState()
 
 			const config = {
 				headers: {
