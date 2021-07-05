@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from '../actions/user'
 
 import Header from './Header'
+import Message from './Message'
 
 const User = ({ match }) => {
 	const id = match.params.id
@@ -10,7 +11,7 @@ const User = ({ match }) => {
 	const userDetails = useSelector((state) => {
 		return state.userDetails
 	})
-	const { user } = userDetails
+	const { user, loading, error } = userDetails
 
 	const dispatch = useDispatch()
 
@@ -22,15 +23,20 @@ const User = ({ match }) => {
 		<div>
 			<Header />
 
-			{user && (
+			{loading ? (
+				<h2>Loading user details...</h2>
+			) : error ? (
+				<Message message={error} />
+			) : (
 				<div>
 					<h2>{user.name}</h2>
 					<div>
 						<h3>added blogs</h3>
 						<ul>
-							{user.blogs.map((blog) => {
-								return <li>{blog.title}</li>
-							})}
+							{user.blogs &&
+								user.blogs.map((blog) => {
+									return <li>{blog.title}</li>
+								})}
 						</ul>
 					</div>
 				</div>
