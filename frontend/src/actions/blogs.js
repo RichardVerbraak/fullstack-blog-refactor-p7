@@ -38,6 +38,42 @@ const getAllBlogs = () => {
 	}
 }
 
+const getBlogDetails = (id) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({
+				type: 'GET_BLOG_DETAILS_REQUEST',
+			})
+
+			const { userLogin: user } = getState()
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${user.token}`,
+				},
+			}
+
+			const { data } = await axios.get(
+				`http://localhost:3003/api/blogs/${id}`,
+				config
+			)
+
+			dispatch({
+				type: 'GET_BLOG_DETAILS_SUCCESS',
+				payload: data,
+			})
+		} catch (error) {
+			dispatch({
+				type: 'GET_BLOG_DETAILS_FAIL',
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
+			})
+		}
+	}
+}
+
 const addNewBlog = (blog) => {
 	return async (dispatch, getState) => {
 		try {
@@ -168,4 +204,4 @@ const likeBlog = (blog) => {
 	}
 }
 
-export { getAllBlogs, addNewBlog, likeBlog, deleteBlog }
+export { getAllBlogs, getBlogDetails, addNewBlog, likeBlog, deleteBlog }
