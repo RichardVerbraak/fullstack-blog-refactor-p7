@@ -7,10 +7,10 @@ import Header from './Header'
 const User = ({ match }) => {
 	const id = match.params.id
 
-	const userInfo = useSelector((state) => {
-		return state.userInfo
+	const userDetails = useSelector((state) => {
+		return state.userDetails
 	})
-	const { user } = userInfo
+	const { user } = userDetails
 
 	const dispatch = useDispatch()
 

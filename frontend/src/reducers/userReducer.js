@@ -46,4 +46,28 @@ const userLoginReducer = (state = { user: {} }, action) => {
 	}
 }
 
-export { userLoginReducer, userListReducer }
+const userDetailsReducer = (state = { user: {} }, action) => {
+	switch (action.type) {
+		case 'GET_USER_DETAILS_REQUEST':
+			return {
+				loading: true,
+			}
+
+		case 'GET_USER_DETAILS_SUCCESS':
+			return {
+				loading: false,
+				user: action.payload,
+			}
+
+		case 'GET_USER_DETAILS_ERROR':
+			return {
+				loading: false,
+				error: action.payload,
+			}
+
+		default:
+			return state
+	}
+}
+
+export { userLoginReducer, userListReducer, userDetailsReducer }

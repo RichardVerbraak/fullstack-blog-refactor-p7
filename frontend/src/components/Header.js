@@ -9,10 +9,11 @@ const Header = () => {
 		dispatch(logoutUser())
 	}
 
-	const userReducer = useSelector((state) => {
-		return state.userInfo
+	// Logged in users details
+	const userLoginReducer = useSelector((state) => {
+		return state.userLogin
 	})
-	const { user } = userReducer
+	const { user } = userLoginReducer
 
 	return (
 		<div>

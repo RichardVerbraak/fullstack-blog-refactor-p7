@@ -8,7 +8,7 @@ const getAllBlogs = () => {
 			})
 
 			const {
-				userInfo: { user },
+				userLogin: { user },
 			} = getState()
 
 			const config = {
@@ -46,7 +46,7 @@ const addNewBlog = (blog) => {
 			})
 
 			const {
-				userInfo: { user },
+				userLogin: { user },
 			} = getState()
 
 			const config = {
@@ -89,7 +89,7 @@ const deleteBlog = (blog) => {
 			})
 
 			const {
-				userInfo: { user },
+				userLogin: { user },
 			} = getState()
 
 			const config = {
@@ -129,7 +129,7 @@ const likeBlog = (blog) => {
 			})
 
 			const {
-				userInfo: { user },
+				userLogin: { user },
 			} = getState()
 
 			const config = {

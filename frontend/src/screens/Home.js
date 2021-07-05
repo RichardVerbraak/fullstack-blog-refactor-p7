@@ -18,10 +18,11 @@ const Home = ({ history }) => {
 	})
 	const { loading: loadingBlogs, blogs, errorBlogs } = blogsReducer
 
-	const userReducer = useSelector((state) => {
-		return state.userInfo
+	// Logged in users info
+	const userLoginReducer = useSelector((state) => {
+		return state.userLogin
 	})
-	const { user } = userReducer
+	const { user } = userLoginReducer
 
 	useEffect(() => {
 		if (!user) {
