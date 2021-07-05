@@ -9,6 +9,20 @@ const getAllBlogs = async (req, res) => {
 	res.send(user.blogs)
 }
 
+const getBlogDetails = async (req, res) => {
+	try {
+		const blogID = req.params.id
+
+		const blog = await Blog.findById(blogID).populate('user')
+
+		res.status(200)
+		res.send(blog)
+	} catch (error) {
+		res.status(404)
+		next(error)
+	}
+}
+
 // Could refactor the authentication process into it's own middleware
 const addNewBlog = async (req, res, next) => {
 	try {
@@ -90,4 +104,10 @@ const updateBlog = async (req, res, next) => {
 	}
 }
 
-module.exports = { getAllBlogs, addNewBlog, deleteBlog, updateBlog }
+module.exports = {
+	getAllBlogs,
+	getBlogDetails,
+	addNewBlog,
+	deleteBlog,
+	updateBlog,
+}

@@ -35,9 +35,9 @@ const getAllUsers = async (req, res) => {
 
 const getUserDetails = async (req, res) => {
 	try {
-		const id = req.params.id
+		const userID = req.params.id
 
-		const user = await User.findById(id).populate('blogs')
+		const user = await User.findById(userID).populate('blogs')
 
 		res.status(200)
 		res.send(user)

@@ -6,11 +6,14 @@ import Users from './components/Users'
 
 import LoginForm from './components/LoginForm'
 import Home from './screens/Home'
+import Blog from './components/Blog'
 
 const App = () => {
 	return (
 		<Router>
 			<Switch>
+				<Route path='/blogs/:id' component={Blog} />
+
 				<Route path='/users/:id' component={User} />
 				<Route path='/users' component={Users} />
 

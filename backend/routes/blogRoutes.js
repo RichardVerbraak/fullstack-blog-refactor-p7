@@ -1,6 +1,7 @@
 const express = require('express')
 const {
 	getAllBlogs,
+	getBlogDetails,
 	addNewBlog,
 	deleteBlog,
 	updateBlog,
@@ -13,6 +14,8 @@ const router = express.Router()
 router.get('/', userExtractor, getAllBlogs)
 
 router.post('/', userExtractor, addNewBlog)
+
+router.get('/:id', userExtractor, getBlogDetails)
 
 router.delete('/:id', userExtractor, deleteBlog)
 
