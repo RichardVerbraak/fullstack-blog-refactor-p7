@@ -10,10 +10,10 @@ const LoginForm = ({ history }) => {
 
 	const dispatch = useDispatch()
 
-	const userReducer = useSelector((state) => {
-		return state.userInfo
+	const userLoginReducer = useSelector((state) => {
+		return state.userLogin
 	})
-	const { user, error } = userReducer
+	const { user, error } = userLoginReducer
 
 	useEffect(() => {
 		if (user) {

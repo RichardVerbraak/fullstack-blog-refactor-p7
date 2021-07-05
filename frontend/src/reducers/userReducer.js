@@ -1,4 +1,26 @@
-const userReducer = (state = { user: {} }, action) => {
+const userListReducer = (state = { users: [] }, action) => {
+	switch (action.type) {
+		case 'GET_USERS_REQUEST':
+			return {
+				loading: true,
+			}
+
+		case 'GET_USERS_SUCCESS':
+			return {
+				loading: false,
+				users: action.payload,
+			}
+
+		case 'GET_USERS_FAIL':
+			return {
+				loading: true,
+			}
+		default:
+			return state
+	}
+}
+
+const userLoginReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case 'USER_LOGIN_REQUEST':
 			return {
@@ -24,26 +46,4 @@ const userReducer = (state = { user: {} }, action) => {
 	}
 }
 
-const userListReducer = (state = { users: [] }, action) => {
-	switch (action.type) {
-		case 'GET_USERS_REQUEST':
-			return {
-				loading: true,
-			}
-
-		case 'GET_USERS_SUCCESS':
-			return {
-				loading: false,
-				users: action.payload,
-			}
-
-		case 'GET_USERS_FAIL':
-			return {
-				loading: true,
-			}
-		default:
-			return state
-	}
-}
-
-export { userReducer, userListReducer }
+export { userLoginReducer, userListReducer }

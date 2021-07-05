@@ -6,12 +6,12 @@ import {
 	likeBlogReducer,
 	deleteBlogReducer,
 } from './reducers/blogReducer'
-import { userReducer, userListReducer } from './reducers/userReducer'
+import { userLoginReducer, userListReducer } from './reducers/userReducer'
 import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
 	blogs: blogListReducer,
-	userInfo: userReducer,
+	userLogin: userLoginReducer,
 	users: userListReducer,
 
 	addBlog: addBlogReducer,
