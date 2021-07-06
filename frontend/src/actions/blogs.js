@@ -201,4 +201,54 @@ const likeBlog = (blog) => {
 	}
 }
 
-export { getAllBlogs, getBlogDetails, addNewBlog, likeBlog, deleteBlog }
+// Probably don't need the actions + a reducer, just another fetch to get the blog details
+const commentBlog = (id, comment) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({
+				type: 'ADD_COMMENT_REQUEST',
+			})
+
+			const {
+				userLogin: { user },
+			} = getState()
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user.token}`,
+				},
+			}
+
+			const { data } = await axios.post(
+				`http://localhost:3003/api/blogs/${id}/comments`,
+				{ comment },
+				config
+			)
+
+			dispatch({
+				type: 'ADD_COMMENT_SUCCESS',
+				payload: data,
+			})
+
+			dispatch(getBlogDetails(id))
+		} catch (error) {
+			dispatch({
+				type: 'ADD_COMMENT_FAIL',
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error,
+			})
+		}
+	}
+}
+
+export {
+	getAllBlogs,
+	getBlogDetails,
+	addNewBlog,
+	likeBlog,
+	deleteBlog,
+	commentBlog,
+}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from './Header'
 import Message from './Message'
 
-import { likeBlog, getBlogDetails } from '../actions/blogs'
+import { likeBlog, getBlogDetails, commentBlog } from '../actions/blogs'
 
 const Blog = ({ match, history }) => {
 	const [comment, setComment] = useState('')
@@ -32,7 +32,9 @@ const Blog = ({ match, history }) => {
 	// 	}
 	// }
 
-	const commentHandler = () => {}
+	const commentHandler = () => {
+		dispatch(commentBlog(id, comment))
+	}
 
 	return (
 		<div>
@@ -72,8 +74,8 @@ const Blog = ({ match, history }) => {
 						<button onClick={commentHandler}>add comment</button>
 						<ul>
 							{blog.comments &&
-								blog.comments.map((comment) => {
-									return <li>{comment}</li>
+								blog.comments.map((comment, index) => {
+									return <li key={index}>{comment}</li>
 								})}
 						</ul>
 					</div>
