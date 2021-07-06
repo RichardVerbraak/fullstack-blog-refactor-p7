@@ -11,6 +11,8 @@ import { getAllBlogs } from '../actions/blogs'
 const Home = ({ history }) => {
 	const [visible, setVisible] = useState(false)
 
+	console.log('rendered')
+
 	const dispatch = useDispatch()
 
 	const blogsReducer = useSelector((state) => {
@@ -24,11 +26,11 @@ const Home = ({ history }) => {
 	})
 	const { user } = userLoginReducer
 
-	useEffect(() => {
-		if (!user) {
-			history.push('/login')
-		}
-	}, [user, history])
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		history.push('/login')
+	// 	}
+	// }, [user, history])
 
 	useEffect(() => {
 		if (user) {

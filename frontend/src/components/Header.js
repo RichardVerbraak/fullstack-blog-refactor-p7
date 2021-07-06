@@ -4,12 +4,11 @@ import { logoutUser } from '../actions/user'
 
 import { Link } from 'react-router-dom'
 
-const Header = ({ history }) => {
+const Header = () => {
 	const dispatch = useDispatch()
 
 	const logout = () => {
 		dispatch(logoutUser())
-		history.push('/login')
 	}
 
 	const userLoginReducer = useSelector((state) => {
@@ -24,10 +23,15 @@ const Header = ({ history }) => {
 					<Link to={'/'}>blogs</Link>
 					<Link to={'/users'}>users</Link>
 				</div>
-				<div>
-					<p>{user && user.name} logged in </p>
-					<button onClick={logout}>Logout</button>
-				</div>
+
+				{user ? (
+					<div>
+						<p>{user.name} logged in</p>
+						<button onClick={logout}>Logout</button>
+					</div>
+				) : (
+					<Link to='/login'>Click here to login</Link>
+				)}
 			</div>
 			<h2>Blog app</h2>
 		</div>
