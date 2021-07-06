@@ -21,11 +21,11 @@ const CreateBlogForm = ({ user }) => {
 		setAuthor('')
 		setUrl('')
 
-		// setMessage(`A new blog ${response.title} by ${response.author} added!`)
+		setMessage(`A new blog ${title} by ${author} added!`)
 
-		// setTimeout(() => {
-		// 	setMessage('')
-		// }, 5000)
+		setTimeout(() => {
+			setMessage('')
+		}, 5000)
 	}
 
 	return (

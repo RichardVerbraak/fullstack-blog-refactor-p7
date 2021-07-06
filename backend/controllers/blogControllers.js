@@ -84,24 +84,20 @@ const deleteBlog = async (req, res, next) => {
 	}
 }
 
-const updateBlog = async (req, res, next) => {
-	const id = req.params.id
-	const { title, author, url, likes } = req.body
-
+const likeBlog = async (req, res, next) => {
 	try {
+		const id = req.params.id
+
 		const blog = await Blog.findById(id)
 
-		blog.title = title || blog.title
-		blog.author = author || blog.author
-		blog.url = url || blog.url
-		blog.likes = likes || blog.likes
+		blog.likes = blog.likes + 1
 
 		const updatedBlog = await blog.save()
 
 		res.status(202)
 		res.send(updatedBlog)
 	} catch (error) {
-		res.status(400)
+		res.status(404)
 		next(error)
 	}
 }
@@ -111,5 +107,5 @@ module.exports = {
 	getBlogDetails,
 	addNewBlog,
 	deleteBlog,
-	updateBlog,
+	likeBlog,
 }

@@ -16,7 +16,7 @@ const Home = ({ history }) => {
 	const blogsReducer = useSelector((state) => {
 		return state.blogs
 	})
-	const { loading: loadingBlogs, blogs, errorBlogs } = blogsReducer
+	const { loading: loadingBlogs, blogs, error: errorBlogs } = blogsReducer
 
 	// Logged in users info
 	const userLoginReducer = useSelector((state) => {

@@ -177,23 +177,18 @@ const likeBlog = (blog) => {
 				},
 			}
 
-			const updatedBlog = {
-				likes: blog.likes + 1,
-			}
-
 			const { data } = await axios.put(
 				`http://localhost:3003/api/blogs/${blog.id}`,
-				updatedBlog,
+				blog,
 				config
 			)
-
-			// Use optimistic update
-			console.log(data)
 
 			dispatch({
 				type: 'LIKE_BLOG_SUCCESS',
 				payload: data,
 			})
+
+			dispatch(getBlogDetails(blog.id))
 		} catch (error) {
 			dispatch({
 				type: 'LIKE_BLOG_FAIL',

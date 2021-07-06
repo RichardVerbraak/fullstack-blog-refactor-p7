@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../actions/user'
 
@@ -7,6 +7,7 @@ const Header = ({ history }) => {
 
 	const logout = () => {
 		dispatch(logoutUser())
+		history.push('/login')
 	}
 
 	// Logged in users details
