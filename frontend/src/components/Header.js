@@ -12,7 +12,6 @@ const Header = ({ history }) => {
 		history.push('/login')
 	}
 
-	// Logged in users details
 	const userLoginReducer = useSelector((state) => {
 		return state.userLogin
 	})

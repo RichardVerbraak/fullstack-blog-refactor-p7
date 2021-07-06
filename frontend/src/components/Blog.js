@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Header from './Header'
@@ -7,6 +7,8 @@ import Message from './Message'
 import { likeBlog, getBlogDetails } from '../actions/blogs'
 
 const Blog = ({ match, history }) => {
+	const [comment, setComment] = useState('')
+
 	const id = match.params.id
 
 	const dispatch = useDispatch()
@@ -30,6 +32,8 @@ const Blog = ({ match, history }) => {
 	// 	}
 	// }
 
+	const commentHandler = () => {}
+
 	return (
 		<div>
 			<Header history={history} />
@@ -40,20 +44,38 @@ const Blog = ({ match, history }) => {
 				<Message message={error} />
 			) : (
 				<div>
-					<h1>{blog.title}</h1>
 					<div>
-						<a href={blog.url}>{blog.url}</a>
-						<p>
-							{blog.likes} likes{' '}
-							<button
-								onClick={() => {
-									dispatch(likeBlog(blog))
-								}}
-							>
-								like
-							</button>
-						</p>
-						{blog.user && <p>added by {blog.user.name}</p>}
+						<h1>{blog.title}</h1>
+						<div>
+							<a href={blog.url}>{blog.url}</a>
+							<p>
+								{blog.likes} likes{' '}
+								<button
+									onClick={() => {
+										dispatch(likeBlog(blog))
+									}}
+								>
+									like
+								</button>
+							</p>
+							{blog.user && <p>added by {blog.user.name}</p>}
+						</div>
+					</div>
+					<div>
+						<h3>Comments</h3>
+						<input
+							type='text'
+							onChange={(e) => {
+								setComment(e.target.value)
+							}}
+						/>
+						<button onClick={commentHandler}>add comment</button>
+						<ul>
+							{blog.comments &&
+								blog.comments.map((comment) => {
+									return <li>{comment}</li>
+								})}
+						</ul>
 					</div>
 				</div>
 			)}

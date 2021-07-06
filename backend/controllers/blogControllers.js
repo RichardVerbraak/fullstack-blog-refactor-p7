@@ -102,10 +102,30 @@ const likeBlog = async (req, res, next) => {
 	}
 }
 
+const commentBlog = async (req, res, next) => {
+	try {
+		const id = req.params.id
+		const { comment } = req.body
+
+		const blog = await Blog.findById(id)
+
+		blog.comments = [...blog.comments, comment]
+
+		const updatedBlog = await blog.save()
+
+		res.status(202)
+		res.send(updatedBlog)
+	} catch (error) {
+		res.status(500)
+		next(error)
+	}
+}
+
 module.exports = {
 	getAllBlogs,
 	getBlogDetails,
 	addNewBlog,
 	deleteBlog,
 	likeBlog,
+	commentBlog,
 }
