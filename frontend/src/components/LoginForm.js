@@ -29,44 +29,46 @@ const LoginForm = ({ history }) => {
 	}
 
 	return (
-		<div>
-			<h2>Login to application</h2>
-			{error && <Message message={error} />}
-			<form className='login-form' onSubmit={onSubmitHandler}>
-				<div>
-					<label>
-						Username:
-						<input
-							id='username'
-							type='text'
-							name='username'
-							value={username}
-							onChange={(e) => {
-								setUsername(e.target.value)
-							}}
-						/>
-					</label>
-				</div>
+		<div className='container mx-auto h-screen flex items-center'>
+			<div className='mx-auto'>
+				<h2 className='font-medium text-xl '>Login to application</h2>
+				{error && <Message message={error} />}
+				<form className='login-form' onSubmit={onSubmitHandler}>
+					<div className=''>
+						<label>
+							Username:
+							<input
+								id='username'
+								type='text'
+								name='username'
+								value={username}
+								onChange={(e) => {
+									setUsername(e.target.value)
+								}}
+							/>
+						</label>
+					</div>
 
-				<div>
-					<label>
-						Password:
-						<input
-							id='password'
-							type='password'
-							name='password'
-							value={password}
-							onChange={(e) => {
-								setPassword(e.target.value)
-							}}
-						/>
-					</label>
-				</div>
+					<div>
+						<label>
+							Password:
+							<input
+								id='password'
+								type='password'
+								name='password'
+								value={password}
+								onChange={(e) => {
+									setPassword(e.target.value)
+								}}
+							/>
+						</label>
+					</div>
 
-				<button className='login-button' type='submit'>
-					Login
-				</button>
-			</form>
+					<button className='button' type='submit'>
+						Login
+					</button>
+				</form>
+			</div>
 		</div>
 	)
 }
