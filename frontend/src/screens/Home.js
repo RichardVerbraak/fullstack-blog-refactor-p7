@@ -8,9 +8,7 @@ import CreateBlogForm from '../components/CreateBlogForm'
 
 import { getAllBlogs } from '../actions/blogs'
 
-const Home = ({ history }) => {
-	const [visible, setVisible] = useState(false)
-
+const Home = () => {
 	console.log('rendered')
 
 	const dispatch = useDispatch()
@@ -26,12 +24,6 @@ const Home = ({ history }) => {
 	})
 	const { user } = userLoginReducer
 
-	// useEffect(() => {
-	// 	if (!user) {
-	// 		history.push('/login')
-	// 	}
-	// }, [user, history])
-
 	useEffect(() => {
 		if (user) {
 			dispatch(getAllBlogs())
@@ -39,20 +31,11 @@ const Home = ({ history }) => {
 	}, [user, dispatch])
 
 	return (
-		<div>
+		<div className='container mx-auto h-screen p-8'>
 			<div>
 				<Header />
 
-				{visible && <CreateBlogForm blogs={blogs} />}
-
-				<button
-					className='button-show-create'
-					onClick={() => {
-						setVisible(!visible)
-					}}
-				>
-					{visible ? 'cancel' : 'create blog'}
-				</button>
+				<CreateBlogForm blogs={blogs} />
 
 				{loadingBlogs ? (
 					<h1>Loading blogs...</h1>

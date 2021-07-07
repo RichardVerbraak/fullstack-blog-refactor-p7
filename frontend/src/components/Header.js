@@ -18,22 +18,40 @@ const Header = () => {
 
 	return (
 		<div>
-			<div>
+			<div className='flex justify-between'>
 				<div>
-					<Link to={'/'}>blogs</Link>
-					<Link to={'/users'}>users</Link>
+					<Link
+						to={'/'}
+						className='text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+					>
+						blogs
+					</Link>
+					<Link
+						to={'/users'}
+						className='text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+					>
+						users
+					</Link>
 				</div>
 
 				{user ? (
-					<div>
+					<div className='flex'>
 						<p>{user.name} logged in</p>
-						<button onClick={logout}>Logout</button>
 					</div>
 				) : (
 					<Link to='/login'>Click here to login</Link>
 				)}
+
+				<button
+					className='text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+					onClick={logout}
+				>
+					Logout
+				</button>
 			</div>
-			<h2>Blog app</h2>
+			<h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900 '>
+				Blog app
+			</h2>
 		</div>
 	)
 }
