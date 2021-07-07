@@ -31,13 +31,23 @@ const LoginForm = ({ history }) => {
 	return (
 		<div className='container mx-auto h-screen flex items-center'>
 			<div className='mx-auto'>
-				<h2 className='font-medium text-xl '>Login to application</h2>
+				<img
+					class='mx-auto h-12 w-auto'
+					src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+					alt='Workflow'
+				></img>
+				<h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900 '>
+					Login to application
+				</h2>
 				{error && <Message message={error} />}
-				<form className='login-form' onSubmit={onSubmitHandler}>
+				<form className='mt-8 space-y-6' onSubmit={onSubmitHandler}>
 					<div className=''>
-						<label>
+						<label for='username'>
 							Username:
 							<input
+								autocomplete='text'
+								required
+								className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
 								id='username'
 								type='text'
 								name='username'
@@ -50,9 +60,10 @@ const LoginForm = ({ history }) => {
 					</div>
 
 					<div>
-						<label>
+						<label for='password'>
 							Password:
 							<input
+								className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
 								id='password'
 								type='password'
 								name='password'
@@ -64,7 +75,10 @@ const LoginForm = ({ history }) => {
 						</label>
 					</div>
 
-					<button className='button' type='submit'>
+					<button
+						className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+						type='submit'
+					>
 						Login
 					</button>
 				</form>
