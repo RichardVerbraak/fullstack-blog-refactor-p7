@@ -32,7 +32,7 @@ const LoginForm = ({ history }) => {
 		<div className='container mx-auto h-screen flex items-center'>
 			<div className='mx-auto'>
 				<img
-					class='mx-auto h-12 w-auto'
+					className='mx-auto h-12 w-auto'
 					src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 					alt='Workflow'
 				></img>
@@ -42,10 +42,10 @@ const LoginForm = ({ history }) => {
 				{error && <Message message={error} />}
 				<form className='mt-8 space-y-6' onSubmit={onSubmitHandler}>
 					<div className=''>
-						<label for='username'>
+						<label htmlFor='username'>
 							Username:
 							<input
-								autocomplete='text'
+								autoComplete='text'
 								required
 								className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
 								id='username'
@@ -60,7 +60,7 @@ const LoginForm = ({ history }) => {
 					</div>
 
 					<div>
-						<label for='password'>
+						<label htmlFor='password'>
 							Password:
 							<input
 								className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
